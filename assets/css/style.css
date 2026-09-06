@@ -162,6 +162,8 @@ section{padding:84px 0;}
   .nav-links.open{display:flex;}
   .nav-links a{padding:12px 0;border-bottom:1px solid var(--line);}
   .nav-toggle{display:block;}
+  .brand-with-logo .sub{display:none;}
+  .brand-with-logo .brand-mark{width:38px;height:38px;}
   .grid-2,.grid-3,.split,.site-footer .f-grid{grid-template-columns:1fr;}
   section{padding:60px 0;}
 }
