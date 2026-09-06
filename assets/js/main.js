@@ -13,7 +13,6 @@ var PROPOSAL_TEXTS = {
     title: '✓ Your proposal draft is ready',
     to: 'It will be sent to',
     openBtn: 'Open email to seanown@gmail.com',
-    alt: 'If your mail app did not open, tap the button above — or copy the draft below and paste it into any email addressed to seanown@gmail.com.',
     copyBtn: 'Copy draft',
     copied: 'Copied ✓'
   },
@@ -21,7 +20,6 @@ var PROPOSAL_TEXTS = {
     title: '✓ 郵件草稿已準備好',
     to: '將寄送到',
     openBtn: '開啟郵件發給 seanown@gmail.com',
-    alt: '若郵件 App 沒有自動跳出，請點上方按鈕——或複製下方草稿，貼到任意郵件寄給 seanown@gmail.com。',
     copyBtn: '複製草稿',
     copied: '已複製 ✓'
   },
@@ -29,7 +27,6 @@ var PROPOSAL_TEXTS = {
     title: '✓ 邮件草稿已准备好',
     to: '将寄送到',
     openBtn: '开启邮件发给 seanown@gmail.com',
-    alt: '若邮件 App 没有自动跳出，请点上方按钮——或复制下方草稿，贴到任意邮件寄给 seanown@gmail.com。',
     copyBtn: '复制草稿',
     copied: '已复制 ✓'
   }
@@ -88,7 +85,6 @@ function showProposalModal(mailtoURL, body){
       '<h3 class="prm-title">' + t.title + '</h3>' +
       '<p class="prm-to">' + t.to + ' <strong>seanown@gmail.com</strong></p>' +
       '<a class="prm-cta" href="' + mailtoURL + '">' + t.openBtn + '</a>' +
-      '<p class="prm-alt">' + t.alt + '</p>' +
       '<details class="prm-details"><summary>' + (document.documentElement.lang === 'en' ? 'Show draft text' : '顯示草稿內容') + '</summary>' +
       '<pre class="prm-body">' + escapeHtml(body) + '</pre>' +
       '<button class="btn btn-ghost" type="button" onclick="copyProposalDraft()">' + t.copyBtn + '</button>' +
@@ -157,7 +153,6 @@ function showProposalResult(mailtoURL, body){
       '<h3>' + t.title + '</h3>' +
       '<p class="pr-to">' + t.to + ' <strong>seanown@gmail.com</strong></p>' +
       '<a class="btn btn-solid" href="' + mailtoURL + '">' + t.openBtn + '</a>' +
-      '<p class="pr-alt">' + t.alt + '</p>' +
       '<pre class="pr-body">' + escapeHtml(body) + '</pre>' +
       '<button class="btn btn-ghost" type="button" onclick="copyProposalDraft()">' + t.copyBtn + '</button>' +
       '<span class="pr-copied" id="pr-copied" hidden>' + t.copied + '</span>' +
