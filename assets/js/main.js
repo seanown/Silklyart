@@ -197,9 +197,9 @@ function escapeHtml(s){
 //   2) watches for the window losing focus (mail app opened) within 1s
 //   3) if nothing opened, shows a modal with the address + copy + manual link
 var CONTACT_TEXTS = {
-  en:  { title:'Email the Curatorial Team', to:'Send your message to', open:'Open email app', copy:'Copy address', copied:'Copied ✓', foot:'Or paste this address into any email app you have.' },
-  hant:{ title:'聯絡策展團隊', to:'請寄信到', open:'開啟郵件 App', copy:'複製郵址', copied:'已複製 ✓', foot:'或把這個地址貼到任何你常用的郵件 App。' },
-  hans:{ title:'联络策展团队', to:'请寄信到', open:'开启邮件 App', copy:'复制邮址', copied:'已复制 ✓', foot:'或把这个地址贴到任何你常用的邮件 App。' }
+  en:  { title:'Reach the Curatorial Team', sub:'Press the button below — your email app will open with our address already filled in. Send your message and we’ll reply.', open:'Open email app', foot:'If your email app doesn’t open, try the mail app on your phone or computer.' },
+  hant:{ title:'聯絡策展團隊', sub:'請按下下方按鈕，你的郵件 App 會自動開啟並預填好收件地址。寫好內容寄出，我們會回信。', open:'開啟郵件 App', foot:'若郵件 App 沒自動開啟，請改用手機或電腦上的郵件 App 寄信。' },
+  hans:{ title:'联络策展团队', sub:'请按下下方按钮，你的邮件 App 会自动开启并预填好收件地址。写好内容寄出，我们会回信。', open:'开启邮件 App', foot:'若邮件 App 没自动开启，请改用手机或电脑上的邮件 App 写信。' }
 };
 function contactTexts(){
   var lang = (document.documentElement.lang || 'en');
