@@ -110,6 +110,10 @@ section{padding:84px 0;}
 .alt .card{background:var(--paper-3);}
 .card h3{margin:0;}
 .card .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);}
+.press-links{list-style:none;padding:0;margin:14px 0 0;font-size:14px;line-height:1.7;}
+.press-links li{margin:2px 0;}
+.press-links a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--ink-soft);text-underline-offset:3px;}
+.press-links a:hover{color:var(--accent);text-decoration-color:var(--accent);}
 .thumb{
   aspect-ratio:3/4;background:var(--paper-2);border:1px solid var(--line);
   display:flex;align-items:flex-end;padding:16px;margin-bottom:6px;
