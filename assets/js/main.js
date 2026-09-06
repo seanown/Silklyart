@@ -11,22 +11,19 @@ var PROPOSAL_TEXTS = {
   err: '請填寫姓名、電郵與作品構想三欄，其餘可後補。',
   en: {
     title: '✓ Your proposal draft is ready',
-    to: 'It will be sent to',
-    openBtn: 'Open email to seanown@gmail.com',
+    openBtn: 'Open email app',
     copyBtn: 'Copy draft',
     copied: 'Copied ✓'
   },
   hant: {
     title: '✓ 郵件草稿已準備好',
-    to: '將寄送到',
-    openBtn: '開啟郵件發給 seanown@gmail.com',
+    openBtn: '開啟郵件 App',
     copyBtn: '複製草稿',
     copied: '已複製 ✓'
   },
   hans: {
     title: '✓ 邮件草稿已准备好',
-    to: '将寄送到',
-    openBtn: '开启邮件发给 seanown@gmail.com',
+    openBtn: '开启邮件 App',
     copyBtn: '复制草稿',
     copied: '已复制 ✓'
   }
@@ -83,14 +80,13 @@ function showProposalModal(mailtoURL, body){
       '<button class="prm-close" type="button" aria-label="Close" onclick="closeProposalModal()">×</button>' +
       '<div class="prm-badge">✓</div>' +
       '<h3 class="prm-title">' + t.title + '</h3>' +
-      '<p class="prm-to">' + t.to + ' <strong>seanown@gmail.com</strong></p>' +
       '<a class="prm-cta" href="' + mailtoURL + '">' + t.openBtn + '</a>' +
       '<details class="prm-details"><summary>' + (document.documentElement.lang === 'en' ? 'Show draft text' : '顯示草稿內容') + '</summary>' +
       '<pre class="prm-body">' + escapeHtml(body) + '</pre>' +
       '<button class="btn btn-ghost" type="button" onclick="copyProposalDraft()">' + t.copyBtn + '</button>' +
       '<span class="pr-copied" id="prm-copied" hidden>' + t.copied + '</span>' +
       '</details>' +
-      '<p class="prm-foot">' + (document.documentElement.lang === 'en' ? 'You can also save this page or close this popup and email seanown@gmail.com directly.' : '你也可以關閉此視窗，直接寄信到 seanown@gmail.com') + '</p>' +
+      '<p class="prm-foot">' + (document.documentElement.lang === 'en' ? 'Or close this popup and use the email app on your phone or computer.' : '或關閉此視窗，改用你手機或電腦上的郵件 App。') + '</p>' +
     '</div>';
   document.body.appendChild(ov);
   // also bind the in-card copy button
@@ -151,7 +147,6 @@ function showProposalResult(mailtoURL, body){
   box.innerHTML =
     '<div class="pr-card">' +
       '<h3>' + t.title + '</h3>' +
-      '<p class="pr-to">' + t.to + ' <strong>seanown@gmail.com</strong></p>' +
       '<a class="btn btn-solid" href="' + mailtoURL + '">' + t.openBtn + '</a>' +
       '<pre class="pr-body">' + escapeHtml(body) + '</pre>' +
       '<button class="btn btn-ghost" type="button" onclick="copyProposalDraft()">' + t.copyBtn + '</button>' +
