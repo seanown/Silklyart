@@ -145,6 +145,13 @@ section{padding:84px 0;}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--vermilion);}
 .field textarea{resize:vertical;min-height:120px;}
 .note{font-size:13px;color:var(--ink-soft);border-left:2px solid var(--gold);padding-left:14px;}
+.proposal-result{margin-top:30px;}
+.pr-card{border:1px solid var(--line);background:var(--paper);padding:26px;border-top:3px solid var(--gold-deep);}
+.pr-card h3{margin:0 0 8px;font-family:var(--serif);font-size:19px;}
+.pr-to{margin:0 0 16px;color:var(--ink-soft);font-size:13px;}
+.pr-alt{margin:14px 0;font-size:12.5px;color:var(--ink-soft);line-height:1.65;}
+.pr-body{background:#fff;border:1px solid var(--line);padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:240px;overflow:auto;margin:0 0 14px;font-family:inherit;}
+.pr-copied{margin-left:10px;color:var(--gold-deep);font-size:12px;}
 
 /* ---------- footer ---------- */
 .site-footer{background:var(--ink);color:#e9e4d8;padding:60px 0 40px;}
