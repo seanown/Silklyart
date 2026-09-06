@@ -52,7 +52,7 @@ function submitArtist(e){
   var brief = (f.brief.value || '').trim();
   if(!name || !email || !brief){
     alert(PROPOSAL_TEXTS.err);
-    return;
+    return false;
   }
   var subject = '[SILKLY ART 藝術家投稿] ' + name + (series ? ' · ' + series : '');
   var body = '藝術家姓名：' + name + '\n'
@@ -62,12 +62,79 @@ function submitArtist(e){
            + '作品構想／簡述：\n' + brief + '\n\n'
            + '—— 本信件由 SILKLY ART 展示站投稿表產生 ——';
   var mailtoURL = 'mailto:seanown@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  // Primary: try to open the mail client automatically.
-  window.location.href = mailtoURL;
-  // Fallback: always render an on-page draft so the user is never left
-  // with "nothing happens" when no default mail client is configured.
+  // Three feedback layers so the user can NEVER miss seeing the draft:
+  //  1) a centered modal popup that blocks until they click "Done"
+  //  2) a toast at the top of the viewport (auto-dismiss after 6s)
+  //  3) the persistent in-page draft card below the form (always visible)
+  showProposalModal(mailtoURL, body);
+  showProposalToast();
   showProposalResult(mailtoURL, body);
+  return false;
 }
+
+// Modal — full-screen overlay + centered card. Unmissable.
+function showProposalModal(mailtoURL, body){
+  closeProposalModal(); // remove any old one first
+  var t = proposalTexts();
+  var ov = document.createElement('div');
+  ov.id = 'proposal-modal';
+  ov.className = 'proposal-modal';
+  ov.setAttribute('role','dialog');
+  ov.setAttribute('aria-modal','true');
+  ov.innerHTML =
+    '<div class="prm-card">' +
+      '<button class="prm-close" type="button" aria-label="Close" onclick="closeProposalModal()">×</button>' +
+      '<div class="prm-badge">✓</div>' +
+      '<h3 class="prm-title">' + t.title + '</h3>' +
+      '<p class="prm-to">' + t.to + ' <strong>seanown@gmail.com</strong></p>' +
+      '<a class="prm-cta" href="' + mailtoURL + '" target="_blank" rel="noopener">' + t.openBtn + '</a>' +
+      '<p class="prm-alt">' + t.alt + '</p>' +
+      '<details class="prm-details"><summary>' + (document.documentElement.lang === 'en' ? 'Show draft text' : '顯示草稿內容') + '</summary>' +
+      '<pre class="prm-body">' + escapeHtml(body) + '</pre>' +
+      '<button class="btn btn-ghost" type="button" onclick="copyProposalDraft()">' + t.copyBtn + '</button>' +
+      '<span class="pr-copied" id="prm-copied" hidden>' + t.copied + '</span>' +
+      '</details>' +
+      '<p class="prm-foot">' + (document.documentElement.lang === 'en' ? 'You can also save this page or close this popup and email seanown@gmail.com directly.' : '你也可以關閉此視窗，直接寄信到 seanown@gmail.com') + '</p>' +
+    '</div>';
+  document.body.appendChild(ov);
+  // also bind the in-card copy button
+  setTimeout(function(){
+    var btns = ov.querySelectorAll('button');
+    btns.forEach(function(b){ if(b.textContent === t.copyBtn || b.textContent === t.copied) {} });
+  }, 0);
+}
+function closeProposalModal(){
+  var old = document.getElementById('proposal-modal');
+  if(old){ old.parentNode.removeChild(old); }
+}
+// top-of-viewport toast
+function showProposalToast(){
+  closeProposalToast();
+  var t = proposalTexts();
+  var el = document.createElement('div');
+  el.id = 'proposal-toast';
+  el.className = 'proposal-toast';
+  el.innerHTML = t.title;
+  document.body.appendChild(el);
+  setTimeout(function(){ el.classList.add('show'); }, 30);
+  setTimeout(function(){
+    el.classList.remove('show');
+    setTimeout(function(){
+      if(el.parentNode){ el.parentNode.removeChild(el); }
+    }, 400);
+  }, 6000);
+}
+function closeProposalToast(){
+  var old = document.getElementById('proposal-toast');
+  if(old){ if(old.parentNode){ old.parentNode.removeChild(old); } }
+}
+// copy draft (used from modal + inline card)
+window.copyProposalDraft = function(){
+  var node = document.querySelector('#proposal-modal .prm-body') || document.querySelector('#proposal-result .pr-body');
+  if(!node) return;
+  copyText(node.textContent);
+  document.querySelectorAll('#prm-copied, #pr-copied').forEach(function(s){ s.hidden = false; });
+};
 
 function showProposalResult(mailtoURL, body){
   var box = document.getElementById('proposal-result');
@@ -76,7 +143,13 @@ function showProposalResult(mailtoURL, body){
     box.id = 'proposal-result';
     box.className = 'proposal-result';
     var form = document.getElementById('artist-form');
-    form.parentNode.insertBefore(box, form.nextSibling);
+    if(form && form.parentNode){
+      // Insert BEFORE the form so the draft is always at the top of the
+      // "Submission" section, never below the fold.
+      form.parentNode.insertBefore(box, form);
+    } else {
+      document.body.appendChild(box);
+    }
   }
   var t = proposalTexts();
   box.innerHTML =
@@ -86,18 +159,18 @@ function showProposalResult(mailtoURL, body){
       '<a class="btn btn-solid" href="' + mailtoURL + '">' + t.openBtn + '</a>' +
       '<p class="pr-alt">' + t.alt + '</p>' +
       '<pre class="pr-body">' + escapeHtml(body) + '</pre>' +
-      '<button class="btn btn-ghost" type="button" id="pr-copy">' + t.copyBtn + '</button>' +
+      '<button class="btn btn-ghost" type="button" onclick="copyProposalDraft()">' + t.copyBtn + '</button>' +
       '<span class="pr-copied" id="pr-copied" hidden>' + t.copied + '</span>' +
     '</div>';
-  var copyBtn = document.getElementById('pr-copy');
-  if(copyBtn){
-    copyBtn.addEventListener('click', function(){
-      copyText(body);
-      var c = document.getElementById('pr-copied');
-      if(c){ c.hidden = false; }
-    });
+  // Scroll the page so the draft card top is at the viewport top — guaranteed visible
+  var rect = box.getBoundingClientRect();
+  if(rect.top < 10 || rect.top > window.innerHeight - 100){
+    box.scrollIntoView({behavior:'smooth', block:'start'});
   }
-  box.scrollIntoView({behavior:'smooth', block:'center'});
+  // animate highlight pulse so the eye is drawn to it
+  box.classList.remove('pr-pulse');
+  void box.offsetWidth;
+  box.classList.add('pr-pulse');
 }
 
 function copyText(txt){

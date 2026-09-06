@@ -145,6 +145,44 @@ section{padding:84px 0;}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--vermilion);}
 .field textarea{resize:vertical;min-height:120px;}
 .note{font-size:13px;color:var(--ink-soft);border-left:2px solid var(--gold);padding-left:14px;}
+
+/* === Submit-a-Proposal feedback layers === */
+/* in-page card (legacy fallback) */
+.proposal-result{margin-top:30px;}
+.proposal-result .pr-card{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--gold);padding:24px 26px;}
+.proposal-result .pr-card h3{margin:0 0 8px;font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);}
+.proposal-result .pr-to{margin:0 0 14px;font-size:14px;color:var(--ink-soft);}
+.proposal-result .pr-alt{margin:14px 0 8px;font-size:13px;color:var(--ink-soft);}
+.proposal-result .pr-body{margin:10px 0;padding:14px;background:#f6f2ea;border:1px solid var(--line);font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;color:var(--ink);white-space:pre-wrap;word-break:break-word;max-height:240px;overflow:auto;}
+.proposal-result .pr-copied{margin-left:12px;font-size:12px;color:var(--gold-deep);}
+.proposal-result.pr-pulse{animation:prPulse 1.8s ease-out 1;}
+@keyframes prPulse{
+  0%   {box-shadow:0 0 0 0 rgba(187,153,79,0.55);}
+  50%  {box-shadow:0 0 0 14px rgba(187,153,79,0);}
+  100% {box-shadow:0 0 0 0 rgba(187,153,79,0);}
+}
+/* full-screen modal popup — unmissable */
+.proposal-modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(20,18,14,0.74);padding:24px;animation:fadeIn .25s ease-out;}
+.proposal-modal .prm-card{position:relative;background:var(--paper);max-width:560px;width:100%;padding:38px 34px 30px;border:1px solid var(--line);border-top:4px solid var(--gold);box-shadow:0 20px 60px rgba(0,0,0,0.4);font-family:var(--sans);}
+.proposal-modal .prm-close{position:absolute;top:10px;right:14px;background:transparent;border:0;font-size:32px;line-height:1;color:var(--ink-soft);cursor:pointer;padding:4px 10px;}
+.proposal-modal .prm-close:hover{color:var(--ink);}
+.proposal-modal .prm-badge{display:inline-block;width:48px;height:48px;line-height:48px;text-align:center;background:var(--gold);color:var(--paper);border-radius:50%;font-size:26px;margin-bottom:16px;}
+.proposal-modal .prm-title{margin:0 0 10px;font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);line-height:1.15;}
+.proposal-modal .prm-to{margin:0 0 20px;font-size:14px;color:var(--ink-soft);}
+.proposal-modal .prm-to strong{color:var(--ink);}
+.proposal-modal .prm-cta{display:inline-block;background:var(--maroon);color:#fff;font-family:var(--sans);font-size:15px;font-weight:600;padding:13px 22px;letter-spacing:.04em;text-decoration:none;border:0;cursor:pointer;transition:background .15s ease;}
+.proposal-modal .prm-cta:hover{background:#6b1818;}
+.proposal-modal .prm-cta:active{transform:translateY(1px);}
+.proposal-modal .prm-alt{margin:18px 0 10px;font-size:13px;color:var(--ink-soft);line-height:1.55;}
+.proposal-modal .prm-details{margin-top:12px;border-top:1px solid var(--line);padding-top:14px;}
+.proposal-modal .prm-details summary{cursor:pointer;font-size:13px;color:var(--gold-deep);font-weight:600;list-style:none;}
+.proposal-modal .prm-details summary::-webkit-details-marker{display:none;}
+.proposal-modal .prm-body{margin:12px 0 8px;padding:12px;background:#f6f2ea;border:1px solid var(--line);font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:12px;line-height:1.5;color:var(--ink);white-space:pre-wrap;word-break:break-word;max-height:200px;overflow:auto;}
+.proposal-modal .prm-foot{margin:18px 0 0;font-size:12px;color:var(--ink-soft);font-style:italic;}
+/* viewport-top toast */
+.proposal-toast{position:fixed;top:-80px;left:50%;transform:translateX(-50%);z-index:10000;background:var(--ink);color:var(--paper);padding:14px 24px;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.02em;box-shadow:0 10px 30px rgba(0,0,0,0.25);transition:top .35s cubic-bezier(.2,.7,.3,1);}
+.proposal-toast.show{top:24px;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .proposal-result{margin-top:30px;}
 .pr-card{border:1px solid var(--line);background:var(--paper);padding:26px;border-top:3px solid var(--gold-deep);}
 .pr-card h3{margin:0 0 8px;font-family:var(--serif);font-size:19px;}
