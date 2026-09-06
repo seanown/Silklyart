@@ -61,6 +61,11 @@ section{padding:84px 0;}
 .brand{display:flex;flex-direction:column;line-height:1.05;}
 .brand .word{font-family:var(--serif);font-size:23px;font-weight:600;letter-spacing:.04em;}
 .brand .sub{font-size:10.5px;letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase;}
+.brand-with-logo{display:flex;flex-direction:row;align-items:center;gap:14px;line-height:1.05;}
+.brand-with-logo .brand-mark{width:46px;height:46px;flex-shrink:0;}
+.brand-with-logo .brand-text{display:flex;flex-direction:column;gap:3px;}
+.brand-with-logo .word{font-family:var(--serif);font-size:23px;font-weight:600;letter-spacing:.04em;color:var(--ink);white-space:nowrap;}
+.brand-with-logo .sub{font-size:9px;letter-spacing:.14em;color:var(--ink-soft);text-transform:uppercase;white-space:nowrap;max-width:none;}
 .nav-links{display:flex;gap:26px;align-items:center;}
 .nav-links a{font-size:14px;letter-spacing:.02em;color:var(--ink);padding:6px 0;position:relative;}
 .nav-links a:hover{color:var(--vermilion);}
@@ -162,8 +167,9 @@ section{padding:84px 0;}
   .nav-links.open{display:flex;}
   .nav-links a{padding:12px 0;border-bottom:1px solid var(--line);}
   .nav-toggle{display:block;}
-  .brand-with-logo .sub{display:none;}
-  .brand-with-logo .brand-mark{width:38px;height:38px;}
+  .brand-with-logo .brand-mark{width:38px;height:38px;flex-shrink:0;}
+  .brand-with-logo .word{font-size:18px;}
+  .brand-with-logo .sub{font-size:8.5px;letter-spacing:.12em;}
   .grid-2,.grid-3,.split,.site-footer .f-grid{grid-template-columns:1fr;}
   section{padding:60px 0;}
 }
