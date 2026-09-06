@@ -174,7 +174,7 @@ section{padding:84px 0;}
 .proposal-modal .prm-title{margin:0 0 10px;font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);line-height:1.15;}
 .proposal-modal .prm-to{margin:0 0 20px;font-size:14px;color:var(--ink-soft);}
 .proposal-modal .prm-to strong{color:var(--ink);}
-.proposal-modal .prm-cta{display:inline-block;background:var(--maroon);color:#fff;font-family:var(--sans);font-size:15px;font-weight:600;padding:13px 22px;letter-spacing:.04em;text-decoration:none;border:0;cursor:pointer;transition:background .15s ease;}
+.proposal-modal .prm-cta{display:inline-block;background:var(--vermilion);color:#fff;font-family:var(--sans);font-size:15px;font-weight:600;padding:13px 22px;letter-spacing:.04em;text-decoration:none;border:0;cursor:pointer;transition:background .15s ease;}
 .proposal-modal .prm-cta:hover{background:#6b1818;}
 .proposal-modal .prm-cta:active{transform:translateY(1px);}
 .proposal-modal .prm-alt{margin:18px 0 10px;font-size:13px;color:var(--ink-soft);line-height:1.55;}
