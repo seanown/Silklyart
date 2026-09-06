@@ -184,6 +184,212 @@ function escapeHtml(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+// ---- Register Interest: series-aware, captures visitor contact ----
+// Each "Register Interest" button on works.html carries its own data-series.
+// Clicking opens a dedicated modal (not the generic contact fallback) that
+// asks for the visitor's name + email so the curatorial team can notify them
+// when that specific series goes live. Curator address stays hidden in the
+// mailto link only — never shown as text (anti-spam / anti-CEO-fraud rule).
+var RI_TEXTS = {
+  en: {
+    title: 'Register Interest',
+    subj: '[SILKLY ART Register Interest] ',
+    series: 'Series',
+    intro: "Leave your details and we’ll notify you the moment this series goes live. Prices follow the silk-weaving quote, so no number yet — just first access.",
+    namePh: 'Your name (optional)',
+    emailPh: 'Your email — so we can notify you',
+    cta: 'Register Interest',
+    err: 'Please enter your email so we can reach you when the series launches.',
+    doneTitle: '✓ Interest registered',
+    doneBody: function(series, name, email){
+      return 'Series of interest: ' + series + '\n' +
+             'Name: ' + (name || '(not given)') + '\n' +
+             'Email: ' + (email || '(not given)') + '\n\n' +
+             'Please notify me when this series is released.\n\n—— SILKLY ART showcase ——';
+    },
+    openBtn: 'Open email app',
+    copyBtn: 'Copy draft',
+    copied: 'Copied ✓',
+    foot: 'Or close this and use the email app on your phone or computer.'
+  },
+  hant: {
+    title: '登記意向',
+    subj: '[SILKLY ART 登記意向] ',
+    series: '系列',
+    intro: '留下你的資料，這個系列一上線我們就會通知你。價格要等絲綢織造報價確認，所以現在還沒有數字——只有優先知情權。',
+    namePh: '你的姓名（選填）',
+    emailPh: '你的電郵——方便我們通知你',
+    cta: '登記意向',
+    err: '請填寫你的電郵，方便我們在系列發行時通知你。',
+    doneTitle: '✓ 意向已登記',
+    doneBody: function(series, name, email){
+      return '感興趣系列：' + series + '\n' +
+             '姓名：' + (name || '（未填）') + '\n' +
+             '電郵：' + (email || '（未填）') + '\n\n' +
+             '這個系列發行時請通知我。\n\n—— SILKLY ART 展示站 ——';
+    },
+    openBtn: '開啟郵件 App',
+    copyBtn: '複製草稿',
+    copied: '已複製 ✓',
+    foot: '或關閉此視窗，改用你手機或電腦上的郵件 App。'
+  },
+  hans: {
+    title: '登记意向',
+    subj: '[SILKLY ART 登记意向] ',
+    series: '系列',
+    intro: '留下你的资料，这个系列一上线我们就会通知你。价格要等丝绸织造报价确认，所以现在还没有数字——只有优先知情权。',
+    namePh: '你的姓名（选填）',
+    emailPh: '你的邮箱——方便我们通知你',
+    cta: '登记意向',
+    err: '请填写你的邮箱，方便我们在系列发行时通知你。',
+    doneTitle: '✓ 意向已登记',
+    doneBody: function(series, name, email){
+      return '感兴趣系列：' + series + '\n' +
+             '姓名：' + (name || '（未填）') + '\n' +
+             '邮箱：' + (email || '（未填）') + '\n\n' +
+             '这个系列发行时请通知我。\n\n—— SILKLY ART 展示站 ——';
+    },
+    openBtn: '开启邮件 App',
+    copyBtn: '复制草稿',
+    copied: '已复制 ✓',
+    foot: '或关闭此窗口，改用你手机或电脑上的邮件 App。'
+  }
+};
+function riTexts(){
+  var lang = (document.documentElement.lang || 'en');
+  if(lang === 'zh-Hant') return RI_TEXTS.hant;
+  if(lang === 'zh-Hans') return RI_TEXTS.hans;
+  return RI_TEXTS.en;
+}
+function initRegisterInterest(){
+  document.querySelectorAll('button.ri-btn').forEach(function(btn){
+    if(btn.dataset.riWired) return;
+    btn.dataset.riWired = '1';
+    btn.addEventListener('click', function(){
+      showRegisterModal(btn.getAttribute('data-series') || '');
+    });
+  });
+}
+function showRegisterModal(series){
+  closeRegisterModal();
+  var t = riTexts();
+  var ov = document.createElement('div');
+  ov.id = 'register-modal';
+  ov.className = 'proposal-modal register-modal';
+  ov.setAttribute('role','dialog');
+  ov.setAttribute('aria-modal','true');
+  ov.innerHTML =
+    '<div class="prm-card">' +
+      '<button class="prm-close" type="button" aria-label="Close" onclick="closeRegisterModal()">×</button>' +
+      '<div class="prm-badge">✦</div>' +
+      '<h3 class="prm-title">' + t.title + '</h3>' +
+      '<p class="prm-to"><strong>' + t.series + '：</strong>' + escapeHtml(series) + '</p>' +
+      '<p class="prm-to" style="margin-top:-8px">' + escapeHtml(t.intro) + '</p>' +
+      '<div class="field" style="margin-top:16px"><label for="ri-name">' + t.namePh + '</label><input id="ri-name" type="text" autocomplete="name"></div>' +
+      '<div class="field" style="margin-top:12px"><label for="ri-email">' + t.emailPh + '</label><input id="ri-email" type="email" autocomplete="email"></div>' +
+      '<p class="ri-err" id="ri-err" hidden>' + t.err + '</p>' +
+      '<button class="prm-cta" type="button" id="ri-submit" style="margin-top:18px">' + t.cta + '</button>' +
+    '</div>';
+  document.body.appendChild(ov);
+  document.getElementById('ri-submit').addEventListener('click', function(){
+    var name = (document.getElementById('ri-name').value || '').trim();
+    var email = (document.getElementById('ri-email').value || '').trim();
+    if(!email){
+      var err = document.getElementById('ri-err');
+      err.hidden = false;
+      document.getElementById('ri-email').focus();
+      return;
+    }
+    var subject = t.subj + series;
+    var body = t.doneBody(series, name, email);
+    var mailtoURL = 'mailto:seanown@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    closeRegisterModal();
+    showRegisterDone(mailtoURL, body, series);
+    showRegisterToast();
+    showRegisterResult(mailtoURL, body, series);
+  });
+}
+function closeRegisterModal(){
+  var old = document.getElementById('register-modal');
+  if(old && old.parentNode) old.parentNode.removeChild(old);
+}
+function showRegisterDone(mailtoURL, body, series){
+  closeRegisterDone();
+  var t = riTexts();
+  var ov = document.createElement('div');
+  ov.id = 'register-done-modal';
+  ov.className = 'proposal-modal register-done-modal';
+  ov.setAttribute('role','dialog');
+  ov.setAttribute('aria-modal','true');
+  ov.innerHTML =
+    '<div class="prm-card">' +
+      '<button class="prm-close" type="button" aria-label="Close" onclick="closeRegisterDone()">×</button>' +
+      '<div class="prm-badge">✓</div>' +
+      '<h3 class="prm-title">' + t.doneTitle + '</h3>' +
+      '<p class="prm-to"><strong>' + t.series + '：</strong>' + escapeHtml(series) + '</p>' +
+      '<a class="prm-cta" href="' + escapeHtml(mailtoURL) + '">' + t.openBtn + '</a>' +
+      '<details class="prm-details"><summary>' + (document.documentElement.lang === 'en' ? 'Show draft text' : '顯示草稿內容') + '</summary>' +
+      '<pre class="prm-body">' + escapeHtml(body) + '</pre>' +
+      '<button class="btn btn-ghost" type="button" onclick="copyRegisterDraft()">' + t.copyBtn + '</button>' +
+      '<span class="pr-copied" id="ri-done-copied" hidden>' + t.copied + '</span>' +
+      '</details>' +
+      '<p class="prm-foot">' + t.foot + '</p>' +
+    '</div>';
+  document.body.appendChild(ov);
+}
+function closeRegisterDone(){
+  var old = document.getElementById('register-done-modal');
+  if(old && old.parentNode) old.parentNode.removeChild(old);
+}
+function showRegisterToast(){
+  closeRegisterToast();
+  var t = riTexts();
+  var el = document.createElement('div');
+  el.id = 'register-toast';
+  el.className = 'proposal-toast';
+  el.innerHTML = t.doneTitle;
+  document.body.appendChild(el);
+  setTimeout(function(){ el.classList.add('show'); }, 30);
+  setTimeout(function(){
+    el.classList.remove('show');
+    setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 400);
+  }, 6000);
+}
+function closeRegisterToast(){
+  var old = document.getElementById('register-toast');
+  if(old && old.parentNode) old.parentNode.removeChild(old);
+}
+window.copyRegisterDraft = function(){
+  var node = document.querySelector('#register-done-modal .prm-body') || document.querySelector('#ri-result .pr-body');
+  if(!node) return;
+  copyText(node.textContent);
+  document.querySelectorAll('#ri-done-copied, #ri-copied').forEach(function(s){ s.hidden = false; });
+};
+function showRegisterResult(mailtoURL, body, series){
+  var box = document.getElementById('ri-result');
+  if(!box){
+    box = document.createElement('div');
+    box.id = 'ri-result';
+    box.className = 'proposal-result';
+    var anchor = document.querySelector('.editions');
+    if(anchor && anchor.parentNode) anchor.parentNode.insertBefore(box, anchor);
+    else document.body.appendChild(box);
+  }
+  var t = riTexts();
+  box.innerHTML =
+    '<div class="pr-card">' +
+      '<h3>' + t.doneTitle + '</h3>' +
+      '<p class="prm-to" style="margin:0 0 12px"><strong>' + t.series + '：</strong>' + escapeHtml(series) + '</p>' +
+      '<a class="btn btn-solid" href="' + escapeHtml(mailtoURL) + '">' + t.openBtn + '</a>' +
+      '<pre class="pr-body">' + escapeHtml(body) + '</pre>' +
+      '<button class="btn btn-ghost" type="button" onclick="copyRegisterDraft()">' + t.copyBtn + '</button>' +
+      '<span class="pr-copied" id="ri-copied" hidden>' + t.copied + '</span>' +
+    '</div>';
+  var rect = box.getBoundingClientRect();
+  if(rect.top < 10 || rect.top > window.innerHeight - 100) box.scrollIntoView({behavior:'smooth', block:'start'});
+  box.classList.remove('pr-pulse'); void box.offsetWidth; box.classList.add('pr-pulse');
+}
+
 // ---- Contact links: guarantee a visible result even with no mail client ----
 // A plain <a href="mailto:"> silently does nothing on a device without a
 // default mail app — exactly the "I clicked and nothing happened" report
@@ -258,3 +464,4 @@ function closeContactModal(){
 }
 // Wire up as soon as the script runs (it loads at the end of <body>).
 initContactLinks();
+initRegisterInterest();
