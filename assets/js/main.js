@@ -217,12 +217,11 @@ function initContactLinks(){
     a.addEventListener('click', function(e){
       e.preventDefault();
       var href = a.getAttribute('href');
-      var addr = href.replace(/^mailto:/,'').split('?')[0];
-      openContactWithFallback(href, addr);
+      openContactWithFallback(href);
     });
   });
 }
-function openContactWithFallback(href, addr){
+function openContactWithFallback(href){
   var opened = false;
   function markOpened(){
     opened = true;
@@ -236,10 +235,10 @@ function openContactWithFallback(href, addr){
   // a silent no-op — which is exactly why the timer below is the real safety net.
   window.location.href = href;
   setTimeout(function(){
-    if(!opened) showContactModal(addr, href);
+    if(!opened) showContactModal(href);
   }, 1000);
 }
-function showContactModal(addr, href){
+function showContactModal(href){
   closeContactModal();
   var t = contactTexts();
   var ov = document.createElement('div');
@@ -252,13 +251,8 @@ function showContactModal(addr, href){
       '<button class="prm-close" type="button" aria-label="Close" onclick="closeContactModal()">×</button>' +
       '<div class="prm-badge">@</div>' +
       '<h3 class="prm-title">' + t.title + '</h3>' +
-      '<p class="prm-to">' + t.to + ' <strong>' + escapeHtml(addr) + '</strong></p>' +
+      '<p class="prm-to">' + t.sub + '</p>' +
       '<a class="prm-cta" href="' + escapeHtml(href) + '">' + t.open + '</a>' +
-      '<div class="prm-copy-row">' +
-        '<input class="prm-addr" type="text" readonly value="' + escapeHtml(addr) + '" aria-label="email address" onfocus="this.select()">' +
-        '<button class="btn btn-ghost" type="button" onclick="copyContactAddr()">' + t.copy + '</button>' +
-      '</div>' +
-      '<span class="pr-copied" id="contact-copied" hidden>' + t.copied + '</span>' +
       '<p class="prm-foot">' + t.foot + '</p>' +
     '</div>';
   document.body.appendChild(ov);
@@ -267,12 +261,5 @@ function closeContactModal(){
   var old = document.getElementById('contact-modal');
   if(old && old.parentNode) old.parentNode.removeChild(old);
 }
-window.copyContactAddr = function(){
-  var inp = document.querySelector('#contact-modal .prm-addr');
-  if(!inp) return;
-  copyText(inp.value);
-  var s = document.getElementById('contact-copied');
-  if(s) s.hidden = false;
-};
 // Wire up as soon as the script runs (it loads at the end of <body>).
 initContactLinks();
