@@ -1,0 +1,6 @@
+# SILKLY ART — Netlify 部署配置
+# 純靜態站：倉庫根目錄即發布目錄，無構建步驟。
+# /mo/ 與 /zh/ 子目錄的 index.html 會作為子路徑自然提供。
+
+[build]
+  publish = "."
