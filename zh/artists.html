@@ -77,7 +77,7 @@
   <div class="container">
     <p class="eyebrow">投稿</p>
     <h2>提交作品提案</h2>
-    <p class="lede">填写下方表单，提交后会开启你的电邮客户端、预先写好给策展团队的信。我们收到后评估文化叙事与技艺，合适的会进入策展流程。</p>
+    <p class="lede">填写下方表单，按下「<strong>送出提案</strong>」后，会开启你的电邮客户端（Outlook、Apple Mail、Gmail 网页等），预先写好寄给 <strong>seanown@gmail.com</strong> 的信件。确认内容后在邮件 App 按「送出」即完成投件。我们收到后评估文化叙事与技艺，合适的会进入策展流程。</p>
     <form class="form-grid" id="artist-form" onsubmit="submitArtist(event)" style="margin-top:28px">
       <div class="field"><label for="name">艺术家姓名 *</label><input id="name" name="name" type="text" required></div>
       <div class="field"><label for="email">联络电邮 *</label><input id="email" name="email" type="email" required></div>
@@ -96,7 +96,7 @@
       </div>
       <div class="field"><label for="brief">作品构想／简述 *</label><textarea id="brief" name="brief" required placeholder="想诠释哪个 IP、用什么视觉语言、为什么适合丝绸海报……"></textarea></div>
       <div><button class="btn btn-solid" type="submit">送出提案</button></div>
-      <p class="note">展示站阶段先以电邮收件。上线部署后，我们会改用 Netlify Forms 或 Formspree，让你不必开启邮件客户端也能投件。</p>
+      <p class="note">投件方式说明：按下「<strong>送出提案</strong>」会开启你的邮件 App，主题自动填为 <em>[SILKLY ART 艺术家投稿] &lt;你的名字&gt; · &lt;系列&gt;</em>，内文自动填入你刚填的栏位，寄到 <strong>seanown@gmail.com</strong>。请在邮件 App 确认后再按「送出」。如果按下按钮没反应，代表你的装置没有预设邮件客户端，请改用一般 Email 直接寄到 <strong>seanown@gmail.com</strong> 即可。展示站阶段先以电邮收件，上线部署后我们会改用 Netlify Forms 或 Formspree，让你不必开启邮件客户端也能投件。</p>
     </form>
   </div>
 </section>
