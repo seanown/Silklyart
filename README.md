@@ -3,8 +3,8 @@
 [silklyart.com](https://silklyart.com) 的官方原始碼。靜態三語策展型網站，
 把東方絲綢限量海報呈現給全球藝術藏家、美術館、品牌方。
 
-- **目標域名**：`silklyart.com`（在 GitHub Pages 設定，CNAME 檔案已 commit）
-- **部署平台**：GitHub Pages（push `main` 即自動部署，CNAME 指向 silklyart.com）
+- **目標域名**：`silklyart.com`（已綁定 Netlify 自訂網域，DNS 在 name.com）
+- **部署平台**：Netlify（push `main` 即自動部署 → https://silklyart.com）
 - **設計系統**：`assets/css/style.css`（核心色票 — 朱紅 `#9E2B25`、墨黑 `#1a1a1a`、金 `#C5A572`）
 - **語言切換**：`<html lang>` 標籤 + 頂部 nav，三語共用同一份 main.js
 
