@@ -411,9 +411,10 @@ function contactTexts(){
 function initContactLinks(){
   document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
     if(a.dataset.contactWired) return;
-    // Leave the proposal flow's own CTAs alone — they already guarantee a
-    // visible result and live inside #proposal-modal / #proposal-result.
-    if(a.closest('#proposal-modal') || a.closest('#proposal-result')) return;
+    // Leave modal-internal CTAs alone — proposal/contact/register modals all
+    // have their own CTA that opens the mail app natively and live inside
+    // .proposal-modal (the shared overlay class).
+    if(a.closest('.proposal-modal')) return;
     a.dataset.contactWired = '1';
     a.addEventListener('click', function(e){
       e.preventDefault();
