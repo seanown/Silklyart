@@ -87,7 +87,7 @@ function showProposalModal(mailtoURL, body){
       '<div class="prm-badge">✓</div>' +
       '<h3 class="prm-title">' + t.title + '</h3>' +
       '<p class="prm-to">' + t.to + ' <strong>seanown@gmail.com</strong></p>' +
-      '<a class="prm-cta" href="' + mailtoURL + '" target="_blank" rel="noopener">' + t.openBtn + '</a>' +
+      '<a class="prm-cta" href="' + mailtoURL + '">' + t.openBtn + '</a>' +
       '<p class="prm-alt">' + t.alt + '</p>' +
       '<details class="prm-details"><summary>' + (document.documentElement.lang === 'en' ? 'Show draft text' : '顯示草稿內容') + '</summary>' +
       '<pre class="prm-body">' + escapeHtml(body) + '</pre>' +

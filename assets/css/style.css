@@ -92,10 +92,14 @@ section{padding:84px 0;}
   font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.04em;
   padding:13px 26px;border:1px solid var(--vermilion);color:var(--vermilion);
   background:transparent;cursor:pointer;transition:all .2s;text-decoration:none;
+  position:relative;
 }
 .btn:hover{background:var(--vermilion);color:#fff;}
+.btn:active{transform:translateY(1px);box-shadow:inset 0 2px 4px rgba(0,0,0,.18);}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
 .btn-solid{background:var(--vermilion);color:#fff;}
 .btn-solid:hover{background:#7d211c;}
+.btn-solid:active{background:#5e1813;transform:translateY(1px);box-shadow:inset 0 2px 4px rgba(0,0,0,.25);}
 .btn-ghost{border-color:var(--ink);color:var(--ink);}
 .btn-ghost:hover{background:var(--ink);color:var(--paper);}
 
