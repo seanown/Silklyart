@@ -188,3 +188,91 @@ function fallbackCopy(txt){
 function escapeHtml(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+
+// ---- Contact links: guarantee a visible result even with no mail client ----
+// A plain <a href="mailto:"> silently does nothing on a device without a
+// default mail app — exactly the "I clicked and nothing happened" report
+// from the real-device test. So every mailto link on the site now:
+//   1) tries to open the mail client natively (best UX for most users)
+//   2) watches for the window losing focus (mail app opened) within 1s
+//   3) if nothing opened, shows a modal with the address + copy + manual link
+var CONTACT_TEXTS = {
+  en:  { title:'Email the Curatorial Team', to:'Send your message to', open:'Open email app', copy:'Copy address', copied:'Copied ✓', foot:'Or paste this address into any email app you have.' },
+  hant:{ title:'聯絡策展團隊', to:'請寄信到', open:'開啟郵件 App', copy:'複製郵址', copied:'已複製 ✓', foot:'或把這個地址貼到任何你常用的郵件 App。' },
+  hans:{ title:'联络策展团队', to:'请寄信到', open:'开启邮件 App', copy:'复制邮址', copied:'已复制 ✓', foot:'或把这个地址贴到任何你常用的邮件 App。' }
+};
+function contactTexts(){
+  var lang = (document.documentElement.lang || 'en');
+  if(lang === 'zh-Hant') return CONTACT_TEXTS.hant;
+  if(lang === 'zh-Hans') return CONTACT_TEXTS.hans;
+  return CONTACT_TEXTS.en;
+}
+function initContactLinks(){
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
+    if(a.dataset.contactWired) return;
+    // Leave the proposal flow's own CTAs alone — they already guarantee a
+    // visible result and live inside #proposal-modal / #proposal-result.
+    if(a.closest('#proposal-modal') || a.closest('#proposal-result')) return;
+    a.dataset.contactWired = '1';
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var href = a.getAttribute('href');
+      var addr = href.replace(/^mailto:/,'').split('?')[0];
+      openContactWithFallback(href, addr);
+    });
+  });
+}
+function openContactWithFallback(href, addr){
+  var opened = false;
+  function markOpened(){
+    opened = true;
+    window.removeEventListener('blur', markOpened);
+    document.removeEventListener('visibilitychange', onVis);
+  }
+  function onVis(){ if(document.hidden) markOpened(); }
+  window.addEventListener('blur', markOpened, { once:true });
+  document.addEventListener('visibilitychange', onVis, { once:true });
+  // Attempt the native mail-client open. On a device with no handler this is
+  // a silent no-op — which is exactly why the timer below is the real safety net.
+  window.location.href = href;
+  setTimeout(function(){
+    if(!opened) showContactModal(addr, href);
+  }, 1000);
+}
+function showContactModal(addr, href){
+  closeContactModal();
+  var t = contactTexts();
+  var ov = document.createElement('div');
+  ov.id = 'contact-modal';
+  ov.className = 'proposal-modal contact-modal';
+  ov.setAttribute('role','dialog');
+  ov.setAttribute('aria-modal','true');
+  ov.innerHTML =
+    '<div class="prm-card">' +
+      '<button class="prm-close" type="button" aria-label="Close" onclick="closeContactModal()">×</button>' +
+      '<div class="prm-badge">@</div>' +
+      '<h3 class="prm-title">' + t.title + '</h3>' +
+      '<p class="prm-to">' + t.to + ' <strong>' + escapeHtml(addr) + '</strong></p>' +
+      '<a class="prm-cta" href="' + escapeHtml(href) + '">' + t.open + '</a>' +
+      '<div class="prm-copy-row">' +
+        '<input class="prm-addr" type="text" readonly value="' + escapeHtml(addr) + '" aria-label="email address" onfocus="this.select()">' +
+        '<button class="btn btn-ghost" type="button" onclick="copyContactAddr()">' + t.copy + '</button>' +
+      '</div>' +
+      '<span class="pr-copied" id="contact-copied" hidden>' + t.copied + '</span>' +
+      '<p class="prm-foot">' + t.foot + '</p>' +
+    '</div>';
+  document.body.appendChild(ov);
+}
+function closeContactModal(){
+  var old = document.getElementById('contact-modal');
+  if(old && old.parentNode) old.parentNode.removeChild(old);
+}
+window.copyContactAddr = function(){
+  var inp = document.querySelector('#contact-modal .prm-addr');
+  if(!inp) return;
+  copyText(inp.value);
+  var s = document.getElementById('contact-copied');
+  if(s) s.hidden = false;
+};
+// Wire up as soon as the script runs (it loads at the end of <body>).
+initContactLinks();
