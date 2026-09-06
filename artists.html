@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For Artists — SILKLY ART</title>
+<meta name="description" content="SILKLY ART continuously invites Chinese and international artists to reimagine Chinese cultural IP and co-release silk editions. Submissions open; exhibitions selective.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html"><span class="word">SILKLY ART</span><span class="sub">Macau Longyou Silk Culture &amp; Art Center</span></a>
+    <button class="nav-toggle" aria-label="Menu" onclick="silklyNav()">&#9776;</button>
+    <nav class="nav-links" id="nav">
+      <a href="index.html">Home</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="works.html">Editions</a>
+      <a href="provenance.html">Provenance</a>
+      <a href="artists.html">Artists</a>
+      <a href="publications.html">Publications</a>
+      <a href="about.html">About</a>
+      <a href="zh/index.html" class="lang">中文</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow">For Artists</p>
+    <h1>For Artists</h1>
+    <p class="lede">Many artists approach us, hoping to exhibit in Macau and publish portfolios. SILKLY ART partners with artists: we provide curation, weaving, release, and exhibition, helping raise the value of your work. Submissions are open; exhibitions are selective.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container split">
+    <div>
+      <p class="eyebrow">Why Work With Us</p>
+      <h2>We help you<br>turn work into an asset</h2>
+      <p class="lede">The lone artist&rsquo;s work often stops at &ldquo;a nice image&rdquo;. We add three things: the material foundation of top-grade silk weaving, individual numbering and a tamper-evident provenance, and the market and prestige that come from physical exhibitions.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card"><span class="tag">Material</span><h3>Top-grade Silk Weaving</h3><p class="muted">Works presented in collectible silk &mdash; hand-feel and colour far surpass paper print.</p></div>
+      <div class="card"><span class="tag">Trust</span><h3>Numbering + Registry</h3><p class="muted">Every piece has an identity and a traceable record, becoming a collectible asset.</p></div>
+      <div class="card"><span class="tag">Scene</span><h3>Macau Physical Show</h3><p class="muted">Appears in our gallery space and co-presented thematic exhibitions, meeting collectors.</p></div>
+      <div class="card"><span class="tag">Revenue Share</span><h3>Partnership</h3><p class="muted">Artists share in the revenue; appreciation of the work feeds back into your reputation and market.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="container">
+    <p class="eyebrow">Submission</p>
+    <h2>Submit a Proposal</h2>
+    <p class="lede">Fill in the form below; on submit it opens your email client with a pre-written letter to the curatorial team. We assess cultural narrative and craft, and suitable proposals enter the curatorial process.</p>
+    <form class="form-grid" id="artist-form" onsubmit="submitArtist(event)" style="margin-top:28px">
+      <div class="field"><label for="name">Artist Name *</label><input id="name" name="name" type="text" required></div>
+      <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required></div>
+      <div class="field"><label for="region">Location / Region</label><input id="region" name="region" type="text" placeholder="e.g. Macau / Taipei / Paris"></div>
+      <div class="field"><label for="series">Series of Interest</label>
+        <select id="series" name="series">
+          <option value="">(unspecified, we suggest)</option>
+          <option>Nantianmen Series</option>
+          <option>Palace Collection</option>
+          <option>Dunhuang</option>
+          <option>Sci-Fi</option>
+          <option>Cinema</option>
+          <option>Music Festivals</option>
+          <option>Artist Icons</option>
+        </select>
+      </div>
+      <div class="field"><label for="brief">Project Idea / Brief *</label><textarea id="brief" name="brief" required placeholder="Which IP to reinterpret, what visual language, why it suits a silk poster..."></textarea></div>
+      <div><button class="btn btn-solid" type="submit">Send Proposal</button></div>
+      <p class="note">During the showcase phase we collect via email. After deployment we will switch to Netlify Forms or Formspree, so you can submit without opening an email client.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container f-grid">
+    <div>
+      <div class="word">SILKLY ART</div>
+      <div class="sub" style="margin:6px 0 16px">Macau Longyou Silk Culture &amp; Art Center</div>
+      <p style="font-size:14px;color:#b9b2a4;max-width:34ch;margin:0">A Macau-based international silk art poster house and curatorial institution.</p>
+    </div>
+    <div><h4>Explore</h4><ul>
+      <li><a href="exhibitions.html">Exhibitions</a></li>
+      <li><a href="works.html">Editions</a></li>
+      <li><a href="provenance.html">Provenance</a></li>
+      <li><a href="artists.html">Artists</a></li>
+    </ul></div>
+    <div><h4>About</h4><ul>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="mailto:seanown@gmail.com">Contact</a></li>
+    </ul></div>
+  </div>
+  <div class="container copy">&copy; 2026 Macau Longyou Silk Culture &amp; Art Center &middot; SILKLY ART &middot; Macau.</div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

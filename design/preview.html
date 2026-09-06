@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SILKLY ART — Art Direction Preview v1</title>
+<meta name="description" content="Art-direction preview for SILKLY ART. Mondo 2011–2013 restrained, museum-grade silk poster house.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+/* ===== SILKLY ART — Art Direction v1 =====
+   Mondo 2011–2013 restrained, museum-grade.
+   Inherits tokens from ../assets/css/style.css (vermilion, ivory, ink, gold). */
+
+.ad-preview{}
+
+/* ---------- HERO: poster hung on the wall ---------- */
+.hero-art{padding:72px 0 96px;background:var(--paper);position:relative;}
+.hero-art .container{display:grid;grid-template-columns:1.05fr 1fr;gap:72px;align-items:center;}
+.poster-hang{
+  position:relative;
+  background:var(--paper-3);
+  padding:36px 36px 56px;
+  border:1px solid var(--line);
+  /* the "wall" */
+}
+.poster-hang::before{
+  /* hanging pin */
+  content:"";position:absolute;left:50%;top:-8px;transform:translateX(-50%);
+  width:8px;height:8px;border-radius:50%;background:var(--vermilion);
+  box-shadow:0 0 0 2px var(--paper);
+}
+.poster-hang img{
+  width:100%;height:auto;display:block;
+  /* the silk weave — subtle vertical hairlines to suggest texture */
+  filter:saturate(1.02) contrast(1.02);
+}
+.poster-caption{
+  margin-top:24px;display:flex;justify-content:space-between;align-items:baseline;
+  border-top:1px solid var(--line);padding-top:14px;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
+}
+.poster-caption b{font-family:var(--serif);font-style:normal;font-weight:500;color:var(--ink);letter-spacing:.02em;text-transform:none;font-size:14px;}
+
+.hero-text .eyebrow{margin-bottom:18px;}
+.hero-text h1{
+  font-size:clamp(34px,4.6vw,54px);
+  font-weight:500;line-height:1.1;letter-spacing:-.012em;
+  margin:0 0 22px;max-width:18ch;
+}
+.hero-text .lede{max-width:46ch;font-size:18px;}
+.hero-text .actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+.hero-text .meta-strip{
+  margin-top:44px;display:flex;gap:38px;flex-wrap:wrap;
+  border-top:1px solid var(--line);padding-top:20px;
+}
+.hero-text .meta-strip .k{font-family:var(--serif);font-size:26px;color:var(--vermilion);line-height:1;}
+.hero-text .meta-strip .v{font-size:12px;letter-spacing:.04em;color:var(--ink-soft);margin-top:6px;}
+
+/* ---------- MUSEUM LABEL (reusable) ---------- */
+.museum-label{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-top:1px solid var(--line);padding-top:12px;margin:18px 0 0;
+}
+.museum-label b{font-family:var(--serif);font-weight:500;color:var(--ink);text-transform:none;letter-spacing:.02em;font-size:14px;}
+
+/* ---------- PILLARS (IP) ---------- */
+.pillars{padding:96px 0;background:var(--paper-2);}
+.pillars .head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:56px;}
+.pillars .head h2{margin:0;}
+.pillars .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.pillar{background:var(--paper);padding:40px 30px;display:flex;flex-direction:column;gap:14px;min-height:280px;}
+.pillar .num{font-family:var(--serif);font-size:13px;letter-spacing:.18em;color:var(--vermilion);}
+.pillar h3{margin:0;font-size:24px;}
+.pillar p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.65;}
+.pillar .glyph{font-family:var(--serif);font-size:80px;color:var(--gold);line-height:1;margin-bottom:auto;}
+
+/* ---------- EDITIONS (poster-as-art cards) ---------- */
+.editions{padding:104px 0;}
+.editions h2{margin-bottom:8px;}
+.editions .sub{color:var(--ink-soft);max-width:52ch;margin-bottom:48px;}
+.ed-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:start;}
+.ed-feature{background:var(--paper-3);padding:32px 32px 40px;border:1px solid var(--line);}
+.ed-feature .poster-frame{aspect-ratio:2/3;overflow:hidden;background:var(--paper);}
+.ed-feature img{width:100%;height:100%;object-fit:cover;}
+.ed-feature .museum-label{display:flex;justify-content:space-between;gap:18px;align-items:baseline;}
+.ed-feature .ed-no{font-family:var(--serif);font-size:46px;color:var(--vermilion);line-height:1;}
+.ed-feature .ed-meta{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+.ed-feature .ed-meta b{display:block;font-family:var(--serif);font-weight:500;color:var(--ink);text-transform:none;letter-spacing:.02em;font-size:17px;margin:2px 0 8px;}
+
+.ed-side{display:flex;flex-direction:column;gap:18px;}
+.ed-mini{display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:start;border:1px solid var(--line);padding:16px;background:var(--paper);}
+.ed-mini .thumb{aspect-ratio:2/3;overflow:hidden;background:var(--paper-2);}
+.ed-mini .thumb img{width:100%;height:100%;object-fit:cover;}
+.ed-mini .name{font-family:var(--serif);font-size:18px;margin:0 0 4px;}
+.ed-mini .ed{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--vermilion);}
+.ed-mini .by{font-size:13px;color:var(--ink-soft);margin-top:8px;}
+
+/* ---------- PROVENANCE STAMP ---------- */
+.provenance{padding:104px 0;background:var(--ink);color:#e9e4d8;}
+.provenance h2{color:#fff;}
+.provenance .lede{color:#b9b2a4;}
+.provenance .stamp-row{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;border-top:1px solid rgba(255,255,255,.14);padding-top:42px;margin-top:42px;}
+.stamp{
+  width:240px;height:240px;border:1.5px solid #b9b2a4;border-radius:50%;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:14px;
+  position:relative;
+}
+.stamp::before,.stamp::after{
+  content:"";position:absolute;left:10px;right:10px;top:10px;bottom:10px;
+  border:1px solid rgba(185,178,164,.5);border-radius:50%;
+}
+.stamp::after{left:18px;right:18px;top:18px;bottom:18px;border-color:rgba(185,178,164,.25);}
+.stamp .arc{font-family:var(--serif);font-size:11px;letter-spacing:.32em;color:#b9b2a4;text-transform:uppercase;}
+.stamp .center{font-family:var(--serif);font-size:36px;color:#fff;margin:8px 0;letter-spacing:.04em;}
+.stamp .no{font-family:var(--sans);font-size:10.5px;letter-spacing:.2em;color:#9a948a;}
+
+/* ---------- TYPE SPECIMEN ---------- */
+.specimen{padding:96px 0;background:var(--paper);}
+.specimen .row{display:grid;grid-template-columns:140px 1fr;gap:32px;align-items:baseline;padding:34px 0;border-bottom:1px solid var(--line);}
+.specimen .row:last-child{border-bottom:0;}
+.specimen .label{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--vermilion);}
+.specimen .sample.serif{font-family:var(--serif);color:var(--ink);}
+.specimen .sample.sans{font-family:var(--sans);color:var(--ink);}
+.specimen .display{font-size:clamp(44px,5.4vw,72px);font-weight:500;letter-spacing:-.015em;line-height:1.05;}
+.specimen .lede-sample{font-size:20px;line-height:1.6;color:var(--ink-soft);max-width:54ch;}
+.specimen .eyebrow-sample{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--vermilion);}
+
+/* ---------- signoff ---------- */
+.signoff{padding:80px 0;border-top:1px solid var(--line);background:var(--paper-2);text-align:center;}
+.signoff .verdict{display:inline-block;font-family:var(--serif);font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:var(--vermilion);border:1px solid var(--vermilion);padding:10px 22px;}
+
+@media(max-width:900px){
+  .hero-art .container{grid-template-columns:1fr;gap:40px;}
+  .pillars .head,.pillars .grid3,.ed-grid,.provenance .stamp-row{grid-template-columns:1fr;gap:32px;}
+  .pillars .grid3{border:0;background:transparent;}
+  .pillar{border:1px solid var(--line);}
+  .stamp{margin:0 auto;}
+}
+</style>
+</head>
+<body class="ad-preview">
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="#">
+      <span class="word">SILKLY ART</span>
+      <span class="sub">Art Direction Preview · v1</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#hero">Hero</a>
+      <a href="#pillars">IP</a>
+      <a href="#editions">Editions</a>
+      <a href="#provenance">Provenance</a>
+      <a href="#specimen">Type</a>
+      <a href="../en/index.html" class="lang">↩ Live site</a>
+    </nav>
+  </div>
+</header>
+
+<!-- =================== HERO =================== -->
+<section class="hero-art" id="hero">
+  <div class="container">
+    <div class="poster-hang">
+      <img src="assets/silklyart-poster-nantianmen.webp" alt="Nantianmen — sample composition" loading="eager">
+      <div class="poster-caption">
+        <span><b>NANTIANMEN No. 1</b> · Sample composition</span>
+        <span>Macau · 2026</span>
+      </div>
+    </div>
+    <div class="hero-text">
+      <p class="eyebrow">Mondo · Restrained · Museum-grade</p>
+      <h1>Turning the silk poster into a collectible art asset.</h1>
+      <p class="lede">A Macau-based silk art poster house. We license Chinese cultural IP to artists worldwide, weave it into numbered silk editions, and certify each piece through an independent review of domestic and international experts.</p>
+      <div class="actions">
+        <a class="btn btn-solid" href="../en/artists.html">Artist Submissions</a>
+        <a class="btn btn-ghost" href="../en/exhibitions.html">Curatorial Program</a>
+      </div>
+      <div class="meta-strip">
+        <div><div class="k">75</div><div class="v">Editions per series</div></div>
+        <div><div class="k">01</div><div class="v">Anti-counterfeit number, every piece</div></div>
+        <div><div class="k">Macao</div><div class="v">The China–world crossroads</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PILLARS =================== -->
+<section class="pillars" id="pillars">
+  <div class="container">
+    <div class="head">
+      <div>
+        <p class="eyebrow">Three IP Pillars</p>
+        <h2>Chinese culture, reimagined by artists worldwide.</h2>
+      </div>
+      <p class="lede">The same co-creation flow applies to every series — only the licensor differs. Each is woven, numbered, and certified as a museum-grade silk edition.</p>
+    </div>
+    <div class="grid3">
+      <div class="pillar">
+        <div class="glyph">一</div>
+        <div class="num">01 · NANTIANMEN</div>
+        <h3>Celestial gates & deities</h3>
+        <p>Heaven's Gate, Mazu, Nezha and the broader pantheon of Chinese deities — reimagined by our approved artists under license.</p>
+      </div>
+      <div class="pillar">
+        <div class="glyph">二</div>
+        <div class="num">02 · PALACE CULTURE</div>
+        <h3>Forbidden City & courtly craft</h3>
+        <p>Palace imagery, court paintings and the Museum-of-the-Palace archive — interpreted through contemporary silk weaving.</p>
+      </div>
+      <div class="pillar">
+        <div class="glyph">三</div>
+        <div class="num">03 · DUNHUANG</div>
+        <h3>Cave murals, silk & the Silk Road</h3>
+        <p>Flying apsaras, sutra illustrations and the visual language of the Dunhuang caves — woven into silk for the first time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== EDITIONS =================== -->
+<section class="editions" id="editions">
+  <div class="container">
+    <p class="eyebrow">Editions · Poster-as-Art</p>
+    <h2>Treated as a museum object, not a print.</h2>
+    <p class="sub">Every silk poster carries an invisible anti-counterfeit number, woven into the silk, traceable piece by piece. Featured piece shown at reduced scale; museum label is part of the design.</p>
+    <div class="ed-grid">
+      <div class="ed-feature">
+        <div class="poster-frame">
+          <img src="assets/silklyart-poster-apsara.webp" alt="Flying Apsara — sample composition" loading="lazy">
+        </div>
+        <div class="museum-label">
+          <span><b>DUNHUANG · FLYING APSARA</b><br>Ed. of 75 · Silk weave · 2026</span>
+          <span class="ed-meta">Anti-counterfeit No.<br><b style="font-family:var(--serif);color:var(--vermilion);font-size:24px;margin-top:4px">N°&nbsp;01 / 75</b></span>
+        </div>
+      </div>
+      <div class="ed-side">
+        <div class="ed-mini">
+          <div class="thumb"><img src="assets/silklyart-poster-nantianmen-sm.webp" alt="Nantianmen" loading="lazy"></div>
+          <div>
+            <p class="ed">Ed. 75 · No. 02</p>
+            <p class="name">Nantianmen — Heaven's Gate</p>
+            <p class="by">Sample composition · Macau · 2026</p>
+          </div>
+        </div>
+        <div class="ed-mini">
+          <div class="thumb"><img src="assets/silklyart-poster-apsara-sm.webp" alt="Flying Apsara" loading="lazy"></div>
+          <div>
+            <p class="ed">Ed. 75 · No. 07</p>
+            <p class="name">Dunhuang — Flying Apsara</p>
+            <p class="by">Sample composition · Macau · 2026</p>
+          </div>
+        </div>
+        <div class="ed-mini" style="border-style:dashed">
+          <div class="thumb" style="background:repeating-linear-gradient(135deg,var(--paper-2) 0 10px,var(--paper-3) 10px 20px);display:flex;align-items:center;justify-content:center">
+            <span style="font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:14px">Reserved</span>
+          </div>
+          <div>
+            <p class="ed">Ed. 75 · No. —</p>
+            <p class="name">Next series to be confirmed</p>
+            <p class="by">Curatorial proposal under review</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PROVENANCE =================== -->
+<section class="provenance" id="provenance">
+  <div class="container">
+    <p class="eyebrow" style="color:#b9b2a4">Basis of Trust · Provenance</p>
+    <h2>Numbered, registered, certified.</h2>
+    <p class="lede">The power to rate does not sit with the issuer. We are the third-party recorder: every silk edition enters an independent review of experts and artists, and every piece is bound to a blockchain certificate of provenance for overseas collectors.</p>
+    <div class="stamp-row">
+      <div>
+        <p style="color:#e9e4d8;font-size:15px;line-height:1.7;margin:0">Artist submission → Curatorial review → Numbered silk release → Independent certification → Collector market. Secondary-market appreciation feeds back into the artist's reputation.</p>
+      </div>
+      <div class="stamp" aria-label="provenance stamp">
+        <span class="arc">SILKLY · ART</span>
+        <span class="center">N° 01</span>
+        <span class="no">Macau · 2026 · Certified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== TYPE SPECIMEN =================== -->
+<section class="specimen" id="specimen">
+  <div class="container">
+    <p class="eyebrow">Typography · Specimen</p>
+    <h2>One serif, one sans. Used with intent.</h2>
+    <p class="lede" style="margin-bottom:36px">Display: Cormorant Garamond (serif). Text & UI: Inter (sans). Vermilion is reserved for accents — single words, edition numbers, hairlines.</p>
+    <div class="row">
+      <div class="label">Display · Serif</div>
+      <div class="sample serif display">A poster is not a print.</div>
+    </div>
+    <div class="row">
+      <div class="label">Lede · Serif</div>
+      <div class="sample serif" style="font-size:26px;font-style:italic;max-width:48ch;color:var(--ink-soft)">A silk poster is an edition, certified and numbered, woven in Macau.</div>
+    </div>
+    <div class="row">
+      <div class="label">Eyebrow · Sans</div>
+      <div class="sample sans eyebrow-sample">Macau · Edition of 75 · Anti-counterfeit numbered</div>
+    </div>
+    <div class="row">
+      <div class="label">Body · Sans</div>
+      <div class="sample sans lede-sample">Every piece is registered piece by piece. Every release is reviewed by an independent committee. Every certificate is bound to a blockchain record for overseas collectors.</div>
+    </div>
+    <div class="row">
+      <div class="label">Edition · Serif</div>
+      <div class="sample serif" style="font-size:46px;color:var(--vermilion);letter-spacing:.02em">N°&nbsp;01 / 75</div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SIGNOFF =================== -->
+<section class="signoff">
+  <div class="container">
+    <p class="eyebrow">End of preview</p>
+    <h2 style="max-width:28ch;margin:0 auto 26px">If this reads as a museum, we have the direction right.</h2>
+    <p class="lede" style="margin:0 auto 30px;max-width:48ch">This is the art direction for review. The live site (English) and the Chinese version both currently use the safe editorial layout; once you sign off, we apply this system across all seven pages.</p>
+    <span class="verdict">Signed off · 2026-09-06</span>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container f-grid">
+    <div>
+      <div class="word">SILKLY ART</div>
+      <div class="sub" style="margin:6px 0 16px">Macau Longyou Silk Culture &amp; Art Center</div>
+      <p style="font-size:14px;color:#b9b2a4;max-width:34ch;margin:0">Art direction preview. Sample compositions shown; final pieces to be created by approved artists.</p>
+    </div>
+    <div>
+      <h4>Preview sections</h4>
+      <ul>
+        <li><a href="#hero">Hero</a></li>
+        <li><a href="#pillars">IP Pillars</a></li>
+        <li><a href="#editions">Editions</a></li>
+        <li><a href="#provenance">Provenance stamp</a></li>
+        <li><a href="#specimen">Typography</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Next</h4>
+      <ul>
+        <li><a href="../en/index.html">View live site (EN)</a></li>
+        <li><a href="../index.html">View live site (中文)</a></li>
+        <li><a href="art-direction-v1.md">Read art direction spec</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container copy">&copy; 2026 Macau Longyou Silk Culture &amp; Art Center · Art direction preview v1.</div>
+</footer>
+
+</body>
+</html>

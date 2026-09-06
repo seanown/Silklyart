@@ -1,0 +1,279 @@
+/* SILKLY ART — static showcase stylesheet
+   Tokens from 設計系統規格書 v0.13 §3 色彩 / §4 字體
+   Mondo 2011–13 restrained, museum-grade. No JS-driven motion. */
+
+:root{
+  --ink:#1C1A16;
+  --ink-soft:#6B6252;
+  --paper:#FCFCFA;
+  --paper-2:#F2EDE3;
+  --paper-3:#F7F4ED;
+  --vermilion:#9E2B25;
+  --gold:#A08A5B;
+  --gold-deep:#7A6740;
+  --line:rgba(28,26,22,.14);
+  --serif:"Cormorant Garamond","Noto Serif TC",Georgia,"Times New Roman",serif;
+  --sans:"Inter","Noto Sans TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --maxw:1120px;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--paper);
+  font-size:17px;
+  line-height:1.75;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.15;letter-spacing:-.01em;margin:0 0 .5em;}
+h1{font-size:clamp(40px,6vw,64px);}
+h2{font-size:clamp(28px,3.6vw,40px);}
+h3{font-size:clamp(21px,2.2vw,26px);}
+p{margin:0 0 1.1em;}
+.eyebrow{
+  font-family:var(--sans);
+  font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--vermilion);margin:0 0 14px;
+}
+.lede{font-size:19px;color:var(--ink-soft);max-width:62ch;}
+.muted{color:var(--ink-soft);}
+
+.container{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+section{padding:84px 0;}
+.alt{background:var(--paper-2);}
+.rule{height:1px;background:var(--line);border:0;margin:0;}
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(252,252,250,.92);
+  backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;}
+.brand{display:flex;flex-direction:column;line-height:1.05;}
+.brand .word{font-family:var(--serif);font-size:23px;font-weight:600;letter-spacing:.04em;}
+.brand .sub{font-size:10.5px;letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase;}
+.nav-links{display:flex;gap:26px;align-items:center;}
+.nav-links a{font-size:14px;letter-spacing:.02em;color:var(--ink);padding:6px 0;position:relative;}
+.nav-links a:hover{color:var(--vermilion);}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--vermilion);transition:width .25s;}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.lang{font-size:12px;color:var(--gold-deep);letter-spacing:.08em;padding:6px 10px !important;border:1px solid var(--line);}
+.nav-links a.lang:hover{color:var(--vermilion);border-color:var(--vermilion);}
+.nav-toggle{display:none;background:none;border:0;font-size:24px;cursor:pointer;color:var(--ink);}
+
+/* ---------- hero ---------- */
+.hero{padding:104px 0 88px;background:var(--paper);}
+.hero .eyebrow{margin-bottom:22px;}
+.hero h1{max-width:18ch;}
+.hero .statement{max-width:30ch;font-size:clamp(30px,4.4vw,52px);margin:0 0 28px;}
+.hero .lede{max-width:54ch;margin-bottom:34px;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.hero-meta{margin-top:54px;display:flex;gap:42px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px;}
+.hero-meta .item .k{font-family:var(--serif);font-size:30px;color:var(--vermilion);}
+.hero-meta .item .v{font-size:13px;color:var(--ink-soft);letter-spacing:.02em;}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.04em;
+  padding:13px 26px;border:1px solid var(--vermilion);color:var(--vermilion);
+  background:transparent;cursor:pointer;transition:all .2s;text-decoration:none;
+}
+.btn:hover{background:var(--vermilion);color:#fff;}
+.btn-solid{background:var(--vermilion);color:#fff;}
+.btn-solid:hover{background:#7d211c;}
+.btn-ghost{border-color:var(--ink);color:var(--ink);}
+.btn-ghost:hover{background:var(--ink);color:var(--paper);}
+
+/* ---------- cards / grid ---------- */
+.grid{display:grid;gap:26px;}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.card{
+  background:var(--paper);border:1px solid var(--line);
+  padding:30px;display:flex;flex-direction:column;gap:12px;
+}
+.alt .card{background:var(--paper-3);}
+.card h3{margin:0;}
+.card .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);}
+.thumb{
+  aspect-ratio:3/4;background:var(--paper-2);border:1px solid var(--line);
+  display:flex;align-items:flex-end;padding:16px;margin-bottom:6px;
+  background-image:linear-gradient(135deg,rgba(158,43,37,.06),rgba(160,138,91,.10));
+}
+.thumb .ph{font-family:var(--serif);font-size:15px;color:var(--ink-soft);font-style:italic;}
+
+/* ---------- flow (provenance) ---------- */
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:30px 0 8px;}
+.flow .step{
+  flex:1 1 150px;border:1px solid var(--line);background:var(--paper-3);
+  padding:16px 18px;font-size:14px;
+}
+.flow .step b{display:block;font-family:var(--serif);font-size:18px;color:var(--vermilion);margin-bottom:4px;font-weight:600;}
+.flow .spine{
+  width:100%;margin-top:14px;border:1px solid var(--vermilion);background:rgba(158,43,37,.06);
+  padding:16px 20px;font-size:14px;color:var(--vermilion);font-weight:600;letter-spacing:.02em;
+}
+
+/* ---------- forms ---------- */
+.form-grid{display:grid;gap:18px;max-width:620px;}
+.field{display:flex;flex-direction:column;gap:7px;}
+.field label{font-size:13px;letter-spacing:.03em;color:var(--ink-soft);}
+.field input,.field textarea,.field select{
+  font-family:var(--sans);font-size:15px;color:var(--ink);
+  border:1px solid var(--line);background:var(--paper);padding:12px 14px;
+  border-radius:0;outline:none;transition:border-color .2s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--vermilion);}
+.field textarea{resize:vertical;min-height:120px;}
+.note{font-size:13px;color:var(--ink-soft);border-left:2px solid var(--gold);padding-left:14px;}
+
+/* ---------- footer ---------- */
+.site-footer{background:var(--ink);color:#e9e4d8;padding:60px 0 40px;}
+.site-footer a{color:#e9e4d8;}
+.site-footer .f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;}
+.site-footer .word{font-family:var(--serif);font-size:22px;color:#fff;}
+.site-footer .sub{font-size:12px;letter-spacing:.1em;color:#b9b2a4;text-transform:uppercase;}
+.site-footer h4{font-family:var(--sans);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#b9b2a4;margin-bottom:14px;font-weight:600;}
+.site-footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:14px;}
+.site-footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-top:22px;font-size:12.5px;color:#9a948a;}
+
+/* ---------- misc ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.badge{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--vermilion);border:1px solid var(--vermilion);padding:5px 12px;}
+.callout{border:1px solid var(--line);padding:26px 28px;background:var(--paper-3);}
+.callout .q{font-family:var(--serif);font-size:22px;line-height:1.4;}
+
+@media(max-width:860px){
+  .nav-links{
+    position:absolute;top:72px;left:0;right:0;background:var(--paper);
+    flex-direction:column;gap:0;padding:8px 28px 18px;border-bottom:1px solid var(--line);
+    display:none;
+  }
+  .nav-links.open{display:flex;}
+  .nav-links a{padding:12px 0;border-bottom:1px solid var(--line);}
+  .nav-toggle{display:block;}
+  .grid-2,.grid-3,.split,.site-footer .f-grid{grid-template-columns:1fr;}
+  section{padding:60px 0;}
+}
+
+/* =========================================================
+   MONDO ART DIRECTION v1 — component library
+   Signed off 2026-09-06. Inherits tokens above.
+   "We are not building a website; we are building a gallery wall."
+   ========================================================= */
+
+/* ---------- HERO: poster hung on the wall ---------- */
+.hero-art{padding:72px 0 92px;background:var(--paper);position:relative;}
+.hero-art .container{display:grid;grid-template-columns:1.05fr 1fr;gap:72px;align-items:center;}
+.poster-hang{
+  position:relative;background:var(--paper-3);
+  padding:34px 34px 54px;border:1px solid var(--line);
+}
+.poster-hang::before{
+  content:"";position:absolute;left:50%;top:-8px;transform:translateX(-50%);
+  width:8px;height:8px;border-radius:50%;background:var(--vermilion);
+  box-shadow:0 0 0 2px var(--paper);
+}
+.poster-hang img{width:100%;height:auto;display:block;filter:saturate(1.02) contrast(1.02);}
+.poster-caption{
+  margin-top:22px;display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  border-top:1px solid var(--line);padding-top:13px;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
+}
+.poster-caption b{font-family:var(--serif);font-style:normal;font-weight:500;color:var(--ink);letter-spacing:.02em;text-transform:none;font-size:14px;}
+
+.hero-text .eyebrow{margin-bottom:18px;}
+.hero-text h1{font-size:clamp(34px,4.6vw,54px);font-weight:500;line-height:1.1;letter-spacing:-.012em;margin:0 0 22px;max-width:18ch;}
+.hero-text .lede{max-width:46ch;font-size:18px;}
+.hero-text .actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+.hero-text .meta-strip{margin-top:44px;display:flex;gap:38px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px;}
+.hero-text .meta-strip .k{font-family:var(--serif);font-size:26px;color:var(--vermilion);line-height:1;}
+.hero-text .meta-strip .v{font-size:12px;letter-spacing:.04em;color:var(--ink-soft);margin-top:6px;}
+
+/* ---------- MUSEUM LABEL (reusable) ---------- */
+.museum-label{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-top:1px solid var(--line);padding-top:12px;margin:18px 0 0;
+}
+.museum-label b{font-family:var(--serif);font-weight:500;color:var(--ink);text-transform:none;letter-spacing:.02em;font-size:14px;}
+
+/* ---------- PILLARS (IP triptych) ---------- */
+.pillars{padding:96px 0;background:var(--paper-2);}
+.pillars .head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:56px;}
+.pillars .head h2{margin:0;}
+.pillars .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.pillar{background:var(--paper);padding:40px 30px;display:flex;flex-direction:column;gap:14px;min-height:280px;}
+.pillar .num{font-family:var(--serif);font-size:13px;letter-spacing:.18em;color:var(--vermilion);}
+.pillar h3{margin:0;font-size:24px;}
+.pillar p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.65;}
+.pillar .glyph{font-family:var(--serif);font-size:80px;color:var(--gold);line-height:1;margin-bottom:auto;}
+
+/* ---------- EDITIONS (poster-as-art cards) ---------- */
+.editions{padding:104px 0;}
+.editions h2{margin-bottom:8px;}
+.editions .sub{color:var(--ink-soft);max-width:52ch;margin-bottom:48px;}
+.ed-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:start;}
+.ed-feature{background:var(--paper-3);padding:32px 32px 40px;border:1px solid var(--line);}
+.ed-feature .poster-frame{aspect-ratio:2/3;overflow:hidden;background:var(--paper);}
+.ed-feature img{width:100%;height:100%;object-fit:cover;}
+.ed-feature .museum-label{display:flex;justify-content:space-between;gap:18px;align-items:baseline;}
+.ed-feature .ed-no{font-family:var(--serif);font-size:46px;color:var(--vermilion);line-height:1;}
+.ed-feature .ed-meta{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+.ed-feature .ed-meta b{display:block;font-family:var(--serif);font-weight:500;color:var(--ink);text-transform:none;letter-spacing:.02em;font-size:17px;margin:2px 0 8px;}
+.ed-side{display:flex;flex-direction:column;gap:18px;}
+.ed-mini{display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:start;border:1px solid var(--line);padding:16px;background:var(--paper);}
+.ed-mini .thumb{aspect-ratio:2/3;overflow:hidden;background:var(--paper-2);border:0;display:block;padding:0;background-image:none;}
+.ed-mini .thumb img{width:100%;height:100%;object-fit:cover;}
+.ed-mini .name{font-family:var(--serif);font-size:18px;margin:0 0 4px;}
+.ed-mini .ed{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--vermilion);}
+.ed-mini .by{font-size:13px;color:var(--ink-soft);margin-top:8px;}
+.ed-mini.dashed{border-style:dashed;}
+.ed-mini.dashed .thumb{background:repeating-linear-gradient(135deg,var(--paper-2) 0 10px,var(--paper-3) 10px 20px);display:flex;align-items:center;justify-content:center;aspect-ratio:2/3;}
+.ed-mini.dashed .thumb .ph{font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:14px;}
+
+/* ---------- PROVENANCE STAMP ---------- */
+.provenance{padding:104px 0;background:var(--ink);color:#e9e4d8;}
+.provenance h2{color:#fff;}
+.provenance .lede{color:#b9b2a4;}
+.provenance .stamp-row{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;border-top:1px solid rgba(255,255,255,.14);padding-top:42px;margin-top:42px;}
+.stamp{
+  width:240px;height:240px;border:1.5px solid #b9b2a4;border-radius:50%;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:14px;position:relative;flex:none;
+}
+.stamp::before,.stamp::after{content:"";position:absolute;left:10px;right:10px;top:10px;bottom:10px;border:1px solid rgba(185,178,164,.5);border-radius:50%;}
+.stamp::after{left:18px;right:18px;top:18px;bottom:18px;border-color:rgba(185,178,164,.25);}
+.stamp .arc{font-family:var(--serif);font-size:11px;letter-spacing:.32em;color:#b9b2a4;text-transform:uppercase;}
+.stamp .center{font-family:var(--serif);font-size:36px;color:#fff;margin:8px 0;letter-spacing:.04em;}
+.stamp .no{font-family:var(--sans);font-size:10.5px;letter-spacing:.2em;color:#9a948a;}
+
+/* ---------- TYPE SPECIMEN ---------- */
+.specimen{padding:96px 0;background:var(--paper);}
+.specimen .row{display:grid;grid-template-columns:140px 1fr;gap:32px;align-items:baseline;padding:34px 0;border-bottom:1px solid var(--line);}
+.specimen .row:last-child{border-bottom:0;}
+.specimen .label{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--vermilion);}
+.specimen .sample.serif{font-family:var(--serif);color:var(--ink);}
+.specimen .sample.sans{font-family:var(--sans);color:var(--ink);}
+.specimen .display{font-size:clamp(44px,5.4vw,72px);font-weight:500;letter-spacing:-.015em;line-height:1.05;}
+.specimen .lede-sample{font-size:20px;line-height:1.6;color:var(--ink-soft);max-width:54ch;}
+.specimen .eyebrow-sample{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--vermilion);}
+
+@media(max-width:900px){
+  .hero-art .container{grid-template-columns:1fr;gap:40px;}
+  .hero-art{padding:52px 0 64px;}
+  .pillars .head,.pillars .grid3,.ed-grid,.provenance .stamp-row{grid-template-columns:1fr;gap:32px;}
+  .pillars .grid3{border:0;background:transparent;}
+  .pillar{border:1px solid var(--line);min-height:0;}
+  .stamp{margin:0 auto;}
+  .specimen .row{grid-template-columns:1fr;gap:10px;}
+}
