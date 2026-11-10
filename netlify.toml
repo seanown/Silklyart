@@ -1,6 +1,66 @@
 # SILKLY ART — Netlify 部署配置
-# 純靜態站：倉庫根目錄即發布目錄，無構建步驟。
+# 倉庫根目錄仍是原始檔（本機預覽、design/preview.html 的相對路徑、
+# tools/sync_ga.py 寫回的頁面路徑都維持不變）。
+# 建置時只把網站檔案複製到 dist/ 再發布。
+# *.md、design/、tools/ 以及其他非網站檔留在倉庫，不進發布目錄。
 # /mo/ 與 /zh/ 子目錄的 index.html 會作為子路徑自然提供。
 
 [build]
-  publish = "."
+  publish = "dist"
+  command = '''
+set -euo pipefail
+rm -rf dist
+mkdir -p dist/mo dist/zh
+cp -a \
+  index.html \
+  about.html \
+  artists.html \
+  exhibitions.html \
+  works.html \
+  provenance.html \
+  publications.html \
+  404.html \
+  robots.txt \
+  sitemap.xml \
+  favicon.ico \
+  favicon-32.png \
+  apple-touch-icon.png \
+  dist/
+cp -a mo/*.html dist/mo/
+cp -a zh/*.html dist/zh/
+cp -a assets dist/
+test -f dist/index.html
+test -f dist/about.html
+test -f dist/artists.html
+test -f dist/exhibitions.html
+test -f dist/works.html
+test -f dist/provenance.html
+test -f dist/publications.html
+test -f dist/404.html
+test -f dist/mo/index.html
+test -f dist/mo/about.html
+test -f dist/mo/artists.html
+test -f dist/mo/exhibitions.html
+test -f dist/mo/works.html
+test -f dist/mo/provenance.html
+test -f dist/mo/publications.html
+test -f dist/zh/index.html
+test -f dist/zh/about.html
+test -f dist/zh/artists.html
+test -f dist/zh/exhibitions.html
+test -f dist/zh/works.html
+test -f dist/zh/provenance.html
+test -f dist/zh/publications.html
+test -f dist/robots.txt
+test -f dist/sitemap.xml
+test -f dist/favicon.ico
+test -f dist/favicon-32.png
+test -f dist/apple-touch-icon.png
+test -f dist/assets/js/analytics.js
+test -f dist/assets/js/main.js
+test -f dist/assets/css/style.css
+if find dist \( -name '*.md' -o -name '*.py' -o -name 'netlify.toml' -o -name '.gitignore' -o -path 'dist/design' -o -path 'dist/design/*' -o -path 'dist/tools' -o -path 'dist/tools/*' \) | grep -q .; then
+  echo 'publish directory contains internal files' >&2
+  exit 1
+fi
+'''
